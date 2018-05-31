@@ -1,0 +1,22 @@
+#!/bin/sh
+###############################################################################
+. ${HOME}/.config/SmokeScreen/smokescreen.conf
+
+# Unmount drives
+/bin/bash ${bindir}/unmount.remote 2>&1
+sleep 10
+
+# Mount drives
+echo "$(date "+%d.%m.%Y %T") INFO: Mounting filesystems"
+
+# Make sure all folders exist
+echo "$(date "+%d.%m.%Y %T") INFO: Creating mountpoint"
+mkdir -p "${mediadir}"
+
+#Cloud data
+echo "$(date "+%d.%m.%Y %T") INFO: Mounting ${mediadir}"
+$rclonebin mount ${rclonemountopts} ${cacheremote}: "${mediadir}" &
+
+echo "$(date "+%d.%m.%Y %T") INFO: File system mounted"
+
+exit

@@ -1,0 +1,14 @@
+#!/bin/sh
+###############################################################################
+. ${HOME}/.config/SmokeScreen/smokescreen.conf
+
+echo "$(date "+%d.%m.%Y %T") INFO: Unmounting filesystems."
+
+if mountpoint -q $mediadir; then
+        echo "$(date "+%d.%m.%Y %T") INFO: Unmounting ${mediadir}"
+        fusermount -uz $mediadir 2>&1
+fi
+
+echo "$(date "+%d.%m.%Y %T") INFO: File System Unmounted!"
+
+exit
